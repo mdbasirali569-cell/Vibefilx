@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#080808"
+    >
+
+    <title>VibeFlix</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        Vibe<span>Flix</span>
+    </div>
+
+
+    <nav>
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#trending">
+            Trending
+        </a>
+
+        <a href="#movies">
+            Movies
+        </a>
+
+        <a href="#categories">
+            Categories
+        </a>
+
+    </nav>
+
+
+    <button
+        class="search-button"
+        id="searchButton"
+    >
+        🔍
+    </button>
+
+</header>
+
+
+
+<!-- HERO -->
+
+<section
+    class="hero"
+    id="home"
+>
+
+    <div class="hero-content">
+
+        <span class="hero-label">
+            🔥 #1 TRENDING
+        </span>
+
+
+        <h1>
+            THE LAST<br>
+            ADVENTURE
+        </h1>
+
+
+        <p class="hero-meta">
+            2026 • Action • 2h 14m • ⭐ 8.7
+        </p>
+
+
+        <p class="hero-description">
+
+            A thrilling cinematic adventure
+            full of mystery, action and
+            unforgettable moments.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <button
+                class="watch-button"
+                id="heroWatchButton"
+            >
+
+                ▶ Watch Now
+
+            </button>
+
+
+            <button
+                class="info-button"
+                id="heroInfoButton"
+            >
+
+                ⓘ More Info
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- TRENDING -->
+
+<section
+    class="section"
+    id="trending"
+>
+
+    <div class="section-header">
+
+        <h2>
+            🔥 Trending Now
+        </h2>
+
+    </div>
+
+
+    <div
+        class="movie-row"
+        id="trendingMovies"
+    >
+
+    </div>
+
+</section>
+
+
+
+<!-- CATEGORIES -->
+
+<section
+    class="section"
+    id="categories"
+>
+
+    <div class="section-header">
+
+        <h2>
+            Browse Categories
+        </h2>
+
+    </div>
+
+
+    <div class="categories">
+
+        <button
+            class="category active"
+            data-category="All"
+        >
+            All
+        </button>
+
+
+        <button
+            class="category"
+            data-category="Action"
+        >
+            Action
+        </button>
+
+
+        <button
+            class="category"
+            data-category="Adventure"
+        >
+            Adventure
+        </button>
+
+
+        <button
+            class="category"
+            data-category="Drama"
+        >
+            Drama
+        </button>
+
+
+        <button
+            class="category"
+            data-category="Sci-Fi"
+        >
+            Sci-Fi
+        </button>
+
+
+        <button
+            class="category"
+            data-category="Horror"
+        >
+            Horror
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- MOVIES -->
+
+<section
+    class="section"
+    id="movies"
+>
+
+    <div class="section-header">
+
+        <h2>
+            🎬 Movies
+        </h2>
+
+        <span
+            id="movieCount"
+        >
+        </span>
+
+    </div>
+
+
+    <div
+        class="movie-grid"
+        id="movieGrid"
+    >
+
+    </div>
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-logo">
+        Vibe<span>Flix</span>
+    </div>
+
+
+    <p>
+        Movies • Series • Entertainment
+    </p>
+
+
+    <p class="copyright">
+        © 2026 VibeFlix
+    </p>
+
+</footer>
+
+
+
+<script
+    src="js/app.js"
+></script>
+
+
+</body>
+
+</html>
