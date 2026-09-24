@@ -15,16 +15,19 @@
         content="#080808"
     >
 
-    <title>Movie | VibeFlix</title>
+    <title>VibeFlix - Movie</title>
 
+
+    <!-- MAIN CSS -->
     <link
         rel="stylesheet"
-        href="css/style.css"
+        href="/Vibefilx/css/style.css"
     >
 
+    <!-- MOVIE CSS -->
     <link
         rel="stylesheet"
-        href="css/movie.css"
+        href="/Vibefilx/css/movie.css"
     >
 
 </head>
@@ -32,6 +35,10 @@
 
 <body>
 
+
+<!-- =========================
+     NAVBAR
+     ========================= -->
 
 <header class="navbar">
 
@@ -42,52 +49,50 @@
 
     <nav>
 
-        <a href="index.html">
+        <a href="/Vibefilx/index.html">
             Home
-        </a>
-
-        <a href="index.html#trending">
-            Trending
-        </a>
-
-        <a href="index.html#movies">
-            Movies
         </a>
 
     </nav>
 
 
-    <a
-        href="index.html"
-        class="back-home"
+    <button
+        class="search-button"
+        type="button"
+        onclick="window.location.href='/Vibefilx/index.html'"
     >
-        ← Home
-    </a>
+        ←
+    </button>
 
 </header>
 
 
 
+<!-- =========================
+     MOVIE CONTENT
+     ========================= -->
+
 <main id="moviePage">
-
-
-    <!-- Movie content will be loaded by movie.js -->
-
 
     <section class="movie-loading">
 
-        <div class="loader"></div>
+        <h2>
+            Loading...
+        </h2>
 
         <p>
-            Loading movie...
+            Please wait.
         </p>
 
     </section>
 
-
 </main>
 
 
+
+<!-- =========================
+     FOOTER
+     ========================= -->
 
 <footer>
 
@@ -109,8 +114,12 @@
 
 
 
+<!-- =========================
+     MOVIE JAVASCRIPT
+     ========================= -->
+
 <script
-    src="js/movie.js"
+    src="/Vibefilx/js/movie.js"
 ></script>
 
 
