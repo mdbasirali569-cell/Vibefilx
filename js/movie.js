@@ -3,6 +3,7 @@
    ========================= */
 
 const movies = [
+
     {
         title: "The Last Adventure",
         year: "2026",
@@ -10,10 +11,17 @@ const movies = [
         rating: "8.7",
         duration: "2h 14m",
         quality: "4K",
-        image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1600&q=80",
-        description: "A thrilling cinematic adventure full of mystery, action and unforgettable moments.",
-        video: ""
+
+        image:
+        "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1600&q=80",
+
+        description:
+        "A thrilling cinematic adventure full of mystery, action and unforgettable moments.",
+
+        video:
+        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     },
+
 
     {
         title: "Night City",
@@ -22,10 +30,17 @@ const movies = [
         rating: "8.4",
         duration: "1h 58m",
         quality: "4K",
-        image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1600&q=80",
-        description: "A mysterious futuristic city hides a dangerous secret.",
-        video: ""
+
+        image:
+        "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1600&q=80",
+
+        description:
+        "A mysterious futuristic city hides a dangerous secret.",
+
+        video:
+        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     },
+
 
     {
         title: "The Journey",
@@ -34,10 +49,17 @@ const movies = [
         rating: "8.1",
         duration: "2h 05m",
         quality: "HD",
-        image: "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=80",
-        description: "One journey that changes everything.",
-        video: ""
+
+        image:
+        "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=80",
+
+        description:
+        "One journey that changes everything.",
+
+        video:
+        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     },
+
 
     {
         title: "Lost World",
@@ -46,10 +68,17 @@ const movies = [
         rating: "8.6",
         duration: "2h 20m",
         quality: "4K",
-        image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80",
-        description: "Discover a world nobody knew existed.",
-        video: ""
+
+        image:
+        "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80",
+
+        description:
+        "Discover a world nobody knew existed.",
+
+        video:
+        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     },
+
 
     {
         title: "Dark Moon",
@@ -58,10 +87,17 @@ const movies = [
         rating: "8.3",
         duration: "2h 01m",
         quality: "4K",
-        image: "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&fit=crop&w=1600&q=80",
-        description: "Humanity faces an unknown threat from deep space.",
-        video: ""
+
+        image:
+        "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&fit=crop&w=1600&q=80",
+
+        description:
+        "Humanity faces an unknown threat from deep space.",
+
+        video:
+        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     },
+
 
     {
         title: "Ocean",
@@ -70,10 +106,17 @@ const movies = [
         rating: "8.0",
         duration: "1h 45m",
         quality: "HD",
-        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
-        description: "A beautiful journey across the endless ocean.",
-        video: ""
+
+        image:
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
+
+        description:
+        "A beautiful journey across the endless ocean.",
+
+        video:
+        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     },
+
 
     {
         title: "Dark House",
@@ -82,22 +125,36 @@ const movies = [
         rating: "7.9",
         duration: "1h 52m",
         quality: "HD",
-        image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1600&q=80",
-        description: "Something is waiting inside the old abandoned house.",
-        video: ""
+
+        image:
+        "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1600&q=80",
+
+        description:
+        "Something is waiting inside the old abandoned house.",
+
+        video:
+        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
     }
+
 ];
 
 
 /* =========================
-   GET MOVIE FROM URL
+   GET MOVIE
    ========================= */
 
-const params = new URLSearchParams(window.location.search);
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
 
-const movieTitle = params.get("movie");
+const movieTitle =
+    params.get("movie");
 
-const page = document.getElementById("moviePage");
+const page =
+    document.getElementById(
+        "moviePage"
+    );
 
 
 /* =========================
@@ -106,20 +163,25 @@ const page = document.getElementById("moviePage");
 
 function findMovie(title) {
 
-    return movies.find(function(movie) {
-        return movie.title === title;
-    });
+    return movies.find(
+        function(movie) {
+
+            return movie.title === title;
+
+        }
+    );
 
 }
 
 
 /* =========================
-   SHOW ERROR
+   ERROR
    ========================= */
 
 function showError(title, text) {
 
     page.innerHTML = `
+
         <section class="movie-loading">
 
             <h2>${title}</h2>
@@ -136,6 +198,7 @@ function showError(title, text) {
             </a>
 
         </section>
+
     `;
 
 }
@@ -151,20 +214,32 @@ function createMoviePage(movie) {
 
         <section class="movie-page">
 
+
+            <!-- HERO -->
+
             <section
                 class="movie-hero"
-                style="background-image: url('${movie.image}');"
+                style="
+                    background-image:
+                    url('${movie.image}');
+                "
             >
 
                 <div class="movie-details">
 
+
                     <div class="movie-badges">
 
-                        <span class="movie-badge red">
+                        <span
+                            class="movie-badge red"
+                        >
                             ${movie.quality}
                         </span>
 
-                        <span class="movie-badge">
+
+                        <span
+                            class="movie-badge"
+                        >
                             ${movie.genre}
                         </span>
 
@@ -186,19 +261,24 @@ function createMoviePage(movie) {
 
                         •
 
-                        <span class="movie-rating">
+                        <span
+                            class="movie-rating"
+                        >
                             ⭐ ${movie.rating}
                         </span>
 
                     </p>
 
 
-                    <p class="movie-description">
+                    <p
+                        class="movie-description"
+                    >
                         ${movie.description}
                     </p>
 
 
                     <div class="movie-actions">
+
 
                         <button
                             class="watch-button"
@@ -207,12 +287,14 @@ function createMoviePage(movie) {
                             ▶ Watch Now
                         </button>
 
+
                         <button
                             class="list-button"
                             id="listButton"
                         >
                             ＋ My List
                         </button>
+
 
                     </div>
 
@@ -221,39 +303,42 @@ function createMoviePage(movie) {
             </section>
 
 
+
             <!-- VIDEO PLAYER -->
 
-            <section class="movie-player-section">
+            <section
+                class="movie-player-section"
+            >
 
                 <h2>
                     ▶ Watch
                 </h2>
 
-                <div class="video-wrapper">
+
+                <div
+                    class="video-wrapper"
+                >
 
                     <video
                         id="movieVideo"
                         controls
                         playsinline
+                        preload="metadata"
                         poster="${movie.image}"
                     >
 
-                        ${
-                            movie.video
-                            ?
-                            `<source
-                                src="${movie.video}"
-                                type="video/mp4"
-                            >`
-                            :
-                            ""
-                        }
+                        <source
+                            src="${movie.video}"
+                            type="video/mp4"
+                        >
 
-                        Your browser does not support video.
+                        Your browser does not
+                        support video.
 
                     </video>
 
                 </div>
+
 
                 <p
                     id="videoMessage"
@@ -263,10 +348,11 @@ function createMoviePage(movie) {
                         margin-top:15px;
                     "
                 >
-                    Video will be added soon.
+                    Test video ready.
                 </p>
 
             </section>
+
 
 
             <!-- MOVIE INFORMATION -->
@@ -277,38 +363,82 @@ function createMoviePage(movie) {
                     Movie Information
                 </h2>
 
+
                 <br>
+
 
                 <div class="info-grid">
 
-                    <div class="info-box">
-                        <span>Release</span>
-                        <strong>${movie.year}</strong>
-                    </div>
 
                     <div class="info-box">
-                        <span>Genre</span>
-                        <strong>${movie.genre}</strong>
+
+                        <span>
+                            Release
+                        </span>
+
+                        <strong>
+                            ${movie.year}
+                        </strong>
+
                     </div>
 
-                    <div class="info-box">
-                        <span>Rating</span>
-                        <strong>⭐ ${movie.rating}</strong>
-                    </div>
 
                     <div class="info-box">
-                        <span>Duration</span>
-                        <strong>${movie.duration}</strong>
+
+                        <span>
+                            Genre
+                        </span>
+
+                        <strong>
+                            ${movie.genre}
+                        </strong>
+
                     </div>
 
+
                     <div class="info-box">
-                        <span>Quality</span>
-                        <strong>${movie.quality}</strong>
+
+                        <span>
+                            Rating
+                        </span>
+
+                        <strong>
+                            ⭐ ${movie.rating}
+                        </strong>
+
                     </div>
+
+
+                    <div class="info-box">
+
+                        <span>
+                            Duration
+                        </span>
+
+                        <strong>
+                            ${movie.duration}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <span>
+                            Quality
+                        </span>
+
+                        <strong>
+                            ${movie.quality}
+                        </strong>
+
+                    </div>
+
 
                 </div>
 
             </section>
+
 
 
             <!-- RELATED MOVIES -->
@@ -319,6 +449,7 @@ function createMoviePage(movie) {
                     More Like This
                 </h2>
 
+
                 <div
                     class="related-grid"
                     id="relatedMovies"
@@ -326,7 +457,9 @@ function createMoviePage(movie) {
 
             </section>
 
+
         </section>
+
     `;
 
 
@@ -344,66 +477,130 @@ function createMoviePage(movie) {
 function setupButtons(movie) {
 
     const playButton =
-        document.getElementById("playButton");
+        document.getElementById(
+            "playButton"
+        );
+
 
     const video =
-        document.getElementById("movieVideo");
+        document.getElementById(
+            "movieVideo"
+        );
+
 
     const videoMessage =
-        document.getElementById("videoMessage");
+        document.getElementById(
+            "videoMessage"
+        );
 
 
-    playButton.addEventListener("click", function() {
+    /* WATCH NOW */
 
-        if (!movie.video) {
+    playButton.addEventListener(
+        "click",
+        function() {
 
-            videoMessage.textContent =
-                "🎬 এই movie-এর video এখনো যোগ করা হয়নি।";
+            video.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
 
-            return;
+
+            video.play().catch(
+                function() {
+
+                    videoMessage.textContent =
+                        "▶ নিচের Play button চাপুন।";
+
+                }
+            );
+
         }
+    );
 
-        video.play();
 
-    });
-
+    /* MY LIST */
 
     const listButton =
-        document.getElementById("listButton");
+        document.getElementById(
+            "listButton"
+        );
 
 
-    listButton.addEventListener("click", function() {
-
-        let list = JSON.parse(
-            localStorage.getItem("vibeflix_mylist")
+    let list =
+        JSON.parse(
+            localStorage.getItem(
+                "vibeflix_mylist"
+            )
         ) || [];
 
 
-        if (list.includes(movie.title)) {
+    if (
+        list.includes(
+            movie.title
+        )
+    ) {
 
-            list = list.filter(function(item) {
-                return item !== movie.title;
-            });
+        listButton.textContent =
+            "✓ In My List";
 
-            listButton.textContent =
-                "＋ My List";
+    }
 
-        } else {
 
-            list.push(movie.title);
+    listButton.addEventListener(
+        "click",
+        function() {
 
-            listButton.textContent =
-                "✓ In My List";
+            let currentList =
+                JSON.parse(
+                    localStorage.getItem(
+                        "vibeflix_mylist"
+                    )
+                ) || [];
+
+
+            if (
+                currentList.includes(
+                    movie.title
+                )
+            ) {
+
+                currentList =
+                    currentList.filter(
+                        function(item) {
+
+                            return item !==
+                                movie.title;
+
+                        }
+                    );
+
+
+                listButton.textContent =
+                    "＋ My List";
+
+            } else {
+
+                currentList.push(
+                    movie.title
+                );
+
+
+                listButton.textContent =
+                    "✓ In My List";
+
+            }
+
+
+            localStorage.setItem(
+                "vibeflix_mylist",
+                JSON.stringify(
+                    currentList
+                )
+            );
 
         }
-
-
-        localStorage.setItem(
-            "vibeflix_mylist",
-            JSON.stringify(list)
-        );
-
-    });
+    );
 
 }
 
@@ -412,74 +609,97 @@ function setupButtons(movie) {
    RELATED MOVIES
    ========================= */
 
-function loadRelatedMovies(currentMovie) {
+function loadRelatedMovies(
+    currentMovie
+) {
 
     const container =
-        document.getElementById("relatedMovies");
+        document.getElementById(
+            "relatedMovies"
+        );
 
 
     const relatedMovies =
-        movies.filter(function(movie) {
+        movies.filter(
+            function(movie) {
 
-            return movie.title !== currentMovie.title;
+                return movie.title !==
+                    currentMovie.title;
 
-        });
+            }
+        );
 
 
     container.innerHTML =
-        relatedMovies.slice(0, 4).map(function(movie) {
+        relatedMovies
+            .slice(0, 4)
+            .map(
+                function(movie) {
 
-            return `
+                    return `
 
-                <div
-                    class="related-card"
-                    data-title="${movie.title}"
-                >
+                        <div
+                            class="related-card"
+                            data-title="${movie.title}"
+                        >
 
-                    <img
-                        src="${movie.image}"
-                        alt="${movie.title}"
-                        loading="lazy"
-                    >
+                            <img
+                                src="${movie.image}"
+                                alt="${movie.title}"
+                                loading="lazy"
+                            >
 
-                    <h3>
-                        ${movie.title}
-                    </h3>
+                            <h3>
+                                ${movie.title}
+                            </h3>
 
-                    <p>
-                        ${movie.year}
-                        •
-                        ${movie.genre}
-                        •
-                        ⭐ ${movie.rating}
-                    </p>
+                            <p>
+                                ${movie.year}
+                                •
+                                ${movie.genre}
+                                •
+                                ⭐ ${movie.rating}
+                            </p>
 
-                </div>
+                        </div>
 
-            `;
+                    `;
 
-        }).join("");
+                }
+            )
+            .join("");
 
 
     const cards =
-        container.querySelectorAll(".related-card");
+        container.querySelectorAll(
+            ".related-card"
+        );
 
 
-    cards.forEach(function(card) {
+    cards.forEach(
+        function(card) {
 
-        card.addEventListener("click", function() {
+            card.addEventListener(
+                "click",
+                function() {
 
-            const title =
-                card.getAttribute("data-title");
+                    const title =
+                        card.getAttribute(
+                            "data-title"
+                        );
 
 
-            window.location.href =
-                "movie.html?movie=" +
-                encodeURIComponent(title);
+                    window.location.href =
+                        "movie.html?movie=" +
+                        encodeURIComponent(
+                            title
+                        );
 
-        });
+                }
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -504,7 +724,9 @@ if (!page) {
 } else {
 
     const movie =
-        findMovie(movieTitle);
+        findMovie(
+            movieTitle
+        );
 
 
     if (!movie) {
@@ -516,7 +738,9 @@ if (!page) {
 
     } else {
 
-        createMoviePage(movie);
+        createMoviePage(
+            movie
+        );
 
     }
 
