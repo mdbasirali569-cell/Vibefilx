@@ -235,33 +235,9 @@ function filterMovies(category) {
 
 function showMovie(title) {
 
-    const movie =
-        movies.find(
-            item =>
-                item.title === title
-        );
-
-
-    if (!movie) return;
-
-
-    alert(
-
-        movie.title +
-
-        "\n\n" +
-
-        movie.year +
-
-        " • " +
-
-        movie.genre +
-
-        "\n⭐ " +
-
-        movie.rating
-
-    );
+    window.location.href =
+        "movie.html?movie=" +
+        encodeURIComponent(title);
 
 }
 
