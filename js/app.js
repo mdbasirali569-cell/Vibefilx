@@ -1,16 +1,9 @@
 /* =========================
-   VIBEFLIX MOVIES
+   VIBEFLIX + TMDB MOVIES
    ========================= */
 
-const movies = [
-    { title: "The Last Adventure", year: "2026", genre: "Action", rating: "8.7", image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" },
-    { title: "Night City", year: "2026", genre: "Sci-Fi", rating: "8.4", image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=800&q=80" },
-    { title: "The Journey", year: "2025", genre: "Drama", rating: "8.1", image: "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80" },
-    { title: "Lost World", year: "2026", genre: "Adventure", rating: "8.6", image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80" },
-    { title: "Dark Moon", year: "2025", genre: "Sci-Fi", rating: "8.3", image: "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&fit=crop&w=800&q=80" },
-    { title: "Ocean", year: "2026", genre: "Adventure", rating: "8.0", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" },
-    { title: "Dark House", year: "2026", genre: "Horror", rating: "7.9", image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80" }
-];
+let movies = [];
+let selectedMovie = null;
 
 const movieGrid = document.getElementById("movieGrid");
 const trendingMovies = document.getElementById("trendingMovies");
@@ -21,124 +14,157 @@ const searchClose = document.getElementById("searchClose");
 const searchInput = document.getElementById("movieSearchInput");
 const searchResults = document.getElementById("searchResults");
 
+const TMDB_IMAGE = "https://image.tmdb.org/t/p/w500";
+const TMDB_BACKDROP = "https://image.tmdb.org/t/p/w1280";
+const TMDB_API = "https://api.themoviedb.org/3";
+const accessToken = window.TMDB_CONFIG?.accessToken || "";
+
+const genreNames = {
+    28: "Action", 12: "Adventure", 18: "Drama", 878: "Sci-Fi", 27: "Horror",
+    35: "Comedy", 80: "Crime", 10749: "Romance", 53: "Thriller", 16: "Animation",
+    14: "Fantasy", 9648: "Mystery", 36: "History", 10752: "War", 99: "Documentary"
+};
+
+function normalizeMovie(item) {
+    const year = item.release_date ? item.release_date.slice(0, 4) : "—";
+    const genre = genreNames[item.genre_ids?.[0]] || "Movie";
+    return {
+        id: item.id,
+        title: item.title || item.original_title || "Untitled",
+        year,
+        genre,
+        rating: item.vote_average ? Number(item.vote_average).toFixed(1) : "—",
+        image: item.poster_path ? TMDB_IMAGE + item.poster_path : "",
+        backdrop: item.backdrop_path ? TMDB_BACKDROP + item.backdrop_path : "",
+        overview: item.overview || "No description available."
+    };
+}
+
 function createMovieCard(movie) {
-    return `
-        <article class="movie-card" onclick="showMovie('${movie.title.replace(/'/g, "\\'")}')" tabindex="0" role="button" aria-label="Open ${movie.title}">
-            <div class="movie-poster-wrap">
-                <img src="${movie.image}" alt="${movie.title}" loading="lazy">
-                <span class="movie-quality">HD</span>
-                <span class="movie-rating">★ ${movie.rating}</span>
-                <div class="movie-card-overlay">
-                    <span class="play-circle" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6.5L17 12L9 17.5V6.5Z" fill="currentColor"/></svg>
-                    </span>
-                    <span>View details</span>
-                </div>
-            </div>
-            <h3>${movie.title}</h3>
-            <p>${movie.year} <span>•</span> ${movie.genre}</p>
-        </article>
-    `;
+    const image = movie.image || "https://via.placeholder.com/500x750/151515/ffffff?text=Vibefilx";
+    return `<article class="movie-card" data-id="${movie.id}" tabindex="0" role="button" aria-label="Open ${escapeHtml(movie.title)}"><div class="movie-poster-wrap"><img src="${image}" alt="${escapeHtml(movie.title)}" loading="lazy"><span class="movie-quality">HD</span><span class="movie-rating">★ ${movie.rating}</span><div class="movie-card-overlay"><span class="play-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 6.5L17 12L9 17.5V6.5Z" fill="currentColor"/></svg></span><span>View details</span></div></div><h3>${escapeHtml(movie.title)}</h3><p>${movie.year} <span>•</span> ${escapeHtml(movie.genre)}</p></article>`;
+}
+
+function escapeHtml(value) {
+    return String(value).replace(/[&<>'"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[char]));
+}
+
+function renderMovieCards(list, target = movieGrid) {
+    if (!target) return;
+    target.innerHTML = list.length ? list.map(createMovieCard).join("") : `<div class="search-empty">No movies found.</div>`;
+    target.querySelectorAll(".movie-card").forEach(card => {
+        const open = () => showMovieById(Number(card.dataset.id));
+        card.addEventListener("click", open);
+        card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
+    });
 }
 
 function loadMovies(list) {
-    if (!movieGrid) return;
-    movieGrid.innerHTML = list.map(createMovieCard).join("");
-    if (movieCount) movieCount.innerText = list.length + " Movies";
+    movies = list;
+    renderMovieCards(list, movieGrid);
+    if (movieCount) movieCount.innerText = `${list.length} Movies`;
 }
 
-function loadTrending() {
-    if (!trendingMovies) return;
-    trendingMovies.innerHTML = movies.slice(0, 5).map(createMovieCard).join("");
+function loadTrending(list) {
+    renderMovieCards(list.slice(0, 8), trendingMovies);
 }
 
-function showMovie(title) {
-    window.location.href = "movie.html?movie=" + encodeURIComponent(title);
+function showMovieById(id) {
+    const movie = movies.find(item => item.id === id);
+    if (!movie) return;
+    window.location.href = "movie.html?movieId=" + encodeURIComponent(movie.id);
+}
+
+async function tmdbFetch(endpoint) {
+    if (!accessToken) throw new Error("TMDB token is missing");
+    const response = await fetch(TMDB_API + endpoint, {
+        headers: { Authorization: `Bearer ${accessToken}`, accept: "application/json" }
+    });
+    if (!response.ok) throw new Error(`TMDB request failed: ${response.status}`);
+    return response.json();
+}
+
+async function loadRealMovies() {
+    if (!accessToken) {
+        showSetupMessage();
+        return;
+    }
+    try {
+        const [popularData, trendingData] = await Promise.all([
+            tmdbFetch("/movie/popular?language=en-US&page=1"),
+            tmdbFetch("/trending/movie/week?language=en-US")
+        ]);
+        const popular = (popularData.results || []).map(normalizeMovie);
+        const trending = (trendingData.results || []).map(normalizeMovie);
+        loadMovies(popular);
+        loadTrending(trending);
+        if (trending[0]) updateHero(trending[0]);
+    } catch (error) {
+        console.error(error);
+        showSetupMessage("TMDB connection failed. Check your API token.");
+    }
+}
+
+function showSetupMessage(message = "Add your TMDB API Read Access Token to js/tmdb-config.js to load real movie data.") {
+    if (movieGrid) movieGrid.innerHTML = `<div class="search-empty">${escapeHtml(message)}</div>`;
+    if (trendingMovies) trendingMovies.innerHTML = `<div class="search-empty">Real movie data is ready once TMDB is connected.</div>`;
+    if (movieCount) movieCount.innerText = "TMDB setup needed";
+}
+
+function updateHero(movie) {
+    const title = document.getElementById("heroTitle");
+    const meta = document.getElementById("heroMeta");
+    const description = document.getElementById("heroDescription");
+    const hero = document.querySelector(".hero");
+    if (title) title.textContent = movie.title;
+    if (meta) meta.textContent = `${movie.year} • ${movie.genre} • ⭐ ${movie.rating}`;
+    if (description) description.textContent = movie.overview;
+    if (hero && movie.backdrop) hero.style.backgroundImage = `linear-gradient(90deg,#000 0%,rgba(0,0,0,.8) 40%,rgba(0,0,0,.2) 100%),url("${movie.backdrop}")`;
+    selectedMovie = movie;
 }
 
 function filterMovies(category) {
     document.querySelectorAll(".category").forEach(button => button.classList.remove("active"));
-    const activeButton = document.querySelector(`.category[data-category="${category}"]`);
+    const activeButton = document.querySelector(`.category[data-category="${CSS.escape(category)}"]`);
     if (activeButton) activeButton.classList.add("active");
-    loadMovies(category === "All" ? movies : movies.filter(movie => movie.genre === category));
+    if (category === "All") loadMovies(movies);
+    else loadMovies(movies.filter(movie => movie.genre === category));
 }
 
-document.querySelectorAll(".category").forEach(button => {
-    button.addEventListener("click", function () { filterMovies(this.dataset.category); });
-});
+document.querySelectorAll(".category").forEach(button => button.addEventListener("click", function () { filterMovies(this.dataset.category); }));
 
 function openSearch() {
-    if (!searchOverlay) return;
-    searchOverlay.classList.add("active");
-    if (searchInput) {
-        searchInput.value = "";
-        setTimeout(() => searchInput.focus(), 100);
+    searchOverlay?.classList.add("active");
+    if (searchInput) { searchInput.value = ""; setTimeout(() => searchInput.focus(), 100); }
+    showSearchMessage("Start typing to search real movies.");
+}
+function closeSearch() { searchOverlay?.classList.remove("active"); }
+function showSearchMessage(message) { if (searchResults) searchResults.innerHTML = `<div class="search-empty">${escapeHtml(message)}</div>`; }
+
+async function searchMovies(query) {
+    const text = query.trim();
+    if (!text) return showSearchMessage("Start typing to search real movies.");
+    if (!accessToken) return showSearchMessage("Connect TMDB first to search real movies.");
+    showSearchMessage("Searching...");
+    try {
+        const data = await tmdbFetch(`/search/movie?query=${encodeURIComponent(text)}&include_adult=false&language=en-US&page=1`);
+        const results = (data.results || []).slice(0, 12).map(normalizeMovie);
+        if (!results.length) return showSearchMessage("No movie found.");
+        searchResults.innerHTML = results.map(movie => `<div class="search-result-card" data-id="${movie.id}"><img src="${movie.image || 'https://via.placeholder.com/100x150/151515/ffffff?text=Movie'}" alt="${escapeHtml(movie.title)}"><div><h3>${escapeHtml(movie.title)}</h3><p>${movie.year} • ${escapeHtml(movie.genre)} • ★ ${movie.rating}</p></div></div>`).join("");
+        searchResults.querySelectorAll(".search-result-card").forEach(card => card.addEventListener("click", () => showMovieById(Number(card.dataset.id))));
+    } catch (error) {
+        console.error(error);
+        showSearchMessage("Search failed. Please try again.");
     }
-    showSearchMessage("Start typing to search movies.");
 }
 
-function closeSearch() {
-    if (searchOverlay) searchOverlay.classList.remove("active");
-}
+searchButton?.addEventListener("click", openSearch);
+searchClose?.addEventListener("click", closeSearch);
+searchInput?.addEventListener("input", e => searchMovies(e.target.value));
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeSearch(); });
+searchOverlay?.addEventListener("click", e => { if (e.target === searchOverlay) closeSearch(); });
 
-function showSearchMessage(message) {
-    if (searchResults) searchResults.innerHTML = `<div class="search-empty">${message}</div>`;
-}
+document.getElementById("heroWatchButton")?.addEventListener("click", () => selectedMovie && showMovieById(selectedMovie.id));
+document.getElementById("heroInfoButton")?.addEventListener("click", () => selectedMovie && showMovieById(selectedMovie.id));
 
-function searchMovies(query) {
-    const text = query.trim().toLowerCase();
-    if (!text) return showSearchMessage("Start typing to search movies.");
-
-    const results = movies.filter(movie =>
-        movie.title.toLowerCase().includes(text) ||
-        movie.genre.toLowerCase().includes(text) ||
-        movie.year.includes(text)
-    );
-
-    if (!results.length) return showSearchMessage("No movie found.");
-
-    searchResults.innerHTML = results.map(movie => `
-        <div class="search-result-card" data-title="${movie.title}">
-            <img src="${movie.image}" alt="${movie.title}">
-            <div>
-                <h3>${movie.title}</h3>
-                <p>${movie.year} • ${movie.genre} • ★ ${movie.rating}</p>
-            </div>
-        </div>
-    `).join("");
-
-    document.querySelectorAll(".search-result-card").forEach(card => {
-        card.addEventListener("click", function () { showMovie(this.dataset.title); });
-    });
-}
-
-if (searchButton) searchButton.addEventListener("click", openSearch);
-if (searchClose) searchClose.addEventListener("click", closeSearch);
-if (searchInput) searchInput.addEventListener("input", function () { searchMovies(this.value); });
-
-document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") closeSearch();
-});
-
-if (searchOverlay) {
-    searchOverlay.addEventListener("click", function (event) {
-        if (event.target === searchOverlay) closeSearch();
-    });
-}
-
-const heroWatchButton = document.getElementById("heroWatchButton");
-if (heroWatchButton) heroWatchButton.addEventListener("click", () => showMovie("The Last Adventure"));
-
-const heroInfoButton = document.getElementById("heroInfoButton");
-if (heroInfoButton) heroInfoButton.addEventListener("click", () => showMovie("The Last Adventure"));
-
-document.addEventListener("keydown", function (event) {
-    const target = event.target;
-    if ((event.key === "Enter" || event.key === " ") && target.classList && target.classList.contains("movie-card")) {
-        event.preventDefault();
-        target.click();
-    }
-});
-
-loadTrending();
-loadMovies(movies);
+loadRealMovies();
