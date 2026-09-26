@@ -11,13 +11,7 @@
 <header class="navbar">
     <a class="logo" href="#home" aria-label="Vibefilx Home" style="display:flex;align-items:center;text-decoration:none;">
         <svg width="180" height="44" viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vibefilx logo" style="display:block;max-width:180px;height:44px;">
-            <defs>
-                <linearGradient id="vfGradient" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#8b5cf6"/>
-                    <stop offset="55%" stop-color="#6d28d9"/>
-                    <stop offset="100%" stop-color="#22d3ee"/>
-                </linearGradient>
-            </defs>
+            <defs><linearGradient id="vfGradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#8b5cf6"/><stop offset="55%" stop-color="#6d28d9"/><stop offset="100%" stop-color="#22d3ee"/></linearGradient></defs>
             <path d="M25 25h72l78 120 42-66h88l-42 66h-88L97 25z" fill="url(#vfGradient)"/>
             <path d="M145 84l34-59h142l-27 45H205l-30 52z" fill="url(#vfGradient)"/>
             <text x="355" y="123" font-family="Arial,Helvetica,sans-serif" font-size="94" font-weight="800" fill="#fff" letter-spacing="-4">Vibefilx</text>
@@ -29,21 +23,27 @@
         <a href="#movies">Movies</a>
         <a href="#categories">Categories</a>
     </nav>
-    <button class="search-button" id="searchButton" type="button" aria-label="Search">🔍</button>
+    <button class="search-button" id="searchButton" type="button" aria-label="Search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.8" stroke="currentColor" stroke-width="2.1"/>
+            <path d="M16.2 16.2L21 21" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+        </svg>
+    </button>
 </header>
 
 <div class="search-overlay" id="searchOverlay">
     <div class="search-panel">
         <div class="search-top">
             <div class="search-input-wrap">
-                <span>🔍</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="11" cy="11" r="6.8" stroke="currentColor" stroke-width="2"/>
+                    <path d="M16.2 16.2L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
                 <input id="movieSearchInput" type="search" placeholder="Search movies..." autocomplete="off">
             </div>
             <button class="search-close" id="searchClose" type="button" aria-label="Close search">✕</button>
         </div>
-        <div class="search-results" id="searchResults">
-            <div class="search-empty">Start typing to search movies.</div>
-        </div>
+        <div class="search-results" id="searchResults"><div class="search-empty">Start typing to search movies.</div></div>
     </div>
 </div>
 
@@ -60,37 +60,12 @@
     </div>
 </section>
 
-<section class="section" id="trending">
-    <div class="section-header"><h2>🔥 Trending Now</h2></div>
-    <div class="movie-row" id="trendingMovies"></div>
-</section>
-
-<section class="section" id="categories">
-    <div class="section-header"><h2>Browse Categories</h2></div>
-    <div class="categories">
-        <button class="category active" data-category="All" type="button">All</button>
-        <button class="category" data-category="Action" type="button">Action</button>
-        <button class="category" data-category="Adventure" type="button">Adventure</button>
-        <button class="category" data-category="Drama" type="button">Drama</button>
-        <button class="category" data-category="Sci-Fi" type="button">Sci-Fi</button>
-        <button class="category" data-category="Horror" type="button">Horror</button>
-    </div>
-</section>
-
-<section class="section" id="movies">
-    <div class="section-header">
-        <h2>🎬 Movies</h2>
-        <span id="movieCount"></span>
-    </div>
-    <div class="movie-grid" id="movieGrid"></div>
-</section>
-
-<footer>
-    <div class="footer-logo">Vibe<span>Flix</span></div>
-    <p>Movies • Series • Entertainment</p>
-    <p class="copyright">© 2026 VibeFlix</p>
-</footer>
-
+<section class="section" id="trending"><div class="section-header"><h2>🔥 Trending Now</h2></div><div class="movie-row" id="trendingMovies"></div></section>
+<section class="section" id="categories"><div class="section-header"><h2>Browse Categories</h2></div><div class="categories">
+    <button class="category active" data-category="All" type="button">All</button><button class="category" data-category="Action" type="button">Action</button><button class="category" data-category="Adventure" type="button">Adventure</button><button class="category" data-category="Drama" type="button">Drama</button><button class="category" data-category="Sci-Fi" type="button">Sci-Fi</button><button class="category" data-category="Horror" type="button">Horror</button>
+</div></section>
+<section class="section" id="movies"><div class="section-header"><h2>🎬 Movies</h2><span id="movieCount"></span></div><div class="movie-grid" id="movieGrid"></div></section>
+<footer><div class="footer-logo">Vibe<span>Flix</span></div><p>Movies • Series • Entertainment</p><p class="copyright">© 2026 VibeFlix</p></footer>
 <script src="js/app.js"></script>
 </body>
 </html>
