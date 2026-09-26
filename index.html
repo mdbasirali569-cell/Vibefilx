@@ -9,8 +9,19 @@
 </head>
 <body>
 <header class="navbar">
-    <a class="logo" href="#home" aria-label="Vibefilx Home">
-        <img src="assets/vibefilx-logo.svg" alt="Vibefilx" style="display:block;width:180px;height:auto;max-height:44px;object-fit:contain;">
+    <a class="logo" href="#home" aria-label="Vibefilx Home" style="display:flex;align-items:center;text-decoration:none;">
+        <svg width="180" height="44" viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vibefilx logo" style="display:block;max-width:180px;height:44px;">
+            <defs>
+                <linearGradient id="vfGradient" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#8b5cf6"/>
+                    <stop offset="55%" stop-color="#6d28d9"/>
+                    <stop offset="100%" stop-color="#22d3ee"/>
+                </linearGradient>
+            </defs>
+            <path d="M25 25h72l78 120 42-66h88l-42 66h-88L97 25z" fill="url(#vfGradient)"/>
+            <path d="M145 84l34-59h142l-27 45H205l-30 52z" fill="url(#vfGradient)"/>
+            <text x="355" y="123" font-family="Arial,Helvetica,sans-serif" font-size="94" font-weight="800" fill="#fff" letter-spacing="-4">Vibefilx</text>
+        </svg>
     </a>
     <nav>
         <a href="#home">Home</a>
