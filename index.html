@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#080808">
     <title>VibeFlix</title>
     <link rel="stylesheet" href="css/style.css">
@@ -22,12 +22,58 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="11" cy="11" r="6.8" stroke="currentColor" stroke-width="2.1"/><path d="M16.2 16.2L21 21" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg>
     </button>
 </header>
+
 <div class="search-overlay" id="searchOverlay"><div class="search-panel"><div class="search-top"><div class="search-input-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="11" cy="11" r="6.8" stroke="currentColor" stroke-width="2"/><path d="M16.2 16.2L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="movieSearchInput" type="search" placeholder="Search movies..." autocomplete="off"></div><button class="search-close" id="searchClose" type="button" aria-label="Close search">✕</button></div><div class="search-results" id="searchResults"><div class="search-empty">Start typing to search movies.</div></div></div></div>
+
 <section class="hero" id="home"><div class="hero-content"><span class="hero-label">🔥 #1 TRENDING</span><h1 id="heroTitle">Loading movies...</h1><p class="hero-meta" id="heroMeta">Please wait</p><p class="hero-description" id="heroDescription">Loading real movie data...</p><div class="hero-buttons"><button class="watch-button" id="heroWatchButton" type="button">▶ View Details</button><button class="info-button" id="heroInfoButton" type="button">ⓘ More Info</button></div></div></section>
+
 <section class="section" id="trending"><div class="section-header"><h2>🔥 Trending Now</h2></div><div class="movie-row" id="trendingMovies"></div></section>
 <section class="section" id="categories"><div class="section-header"><h2>Browse Categories</h2></div><div class="categories"><button class="category active" data-category="All" type="button">All</button><button class="category" data-category="Action" type="button">Action</button><button class="category" data-category="Adventure" type="button">Adventure</button><button class="category" data-category="Drama" type="button">Drama</button><button class="category" data-category="Sci-Fi" type="button">Sci-Fi</button><button class="category" data-category="Horror" type="button">Horror</button></div></section>
+
+<section class="section" id="series"><div class="section-header"><h2>📺 Series</h2><span>Coming soon</span></div><div class="series-coming"><div class="series-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M8 3v4M16 3v4M7 15h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><h3>Series are coming to Vibefilx</h3><p>TV shows, seasons and episodes will appear here after the movie catalog is connected.</p></div></section>
+
 <section class="section" id="movies"><div class="section-header"><h2>🎬 Movies</h2><span id="movieCount"></span></div><div class="movie-grid" id="movieGrid"></div></section>
+
 <footer><div class="footer-logo">Vibe<span>Flix</span></div><p>Movies • Series • Entertainment</p><p class="copyright">© 2026 VibeFlix</p></footer>
+
+<!-- Mobile OTT-style bottom navigation -->
+<nav class="mobile-bottom-nav" aria-label="Mobile navigation">
+    <a class="mobile-nav-item active" href="#home" data-nav="home" aria-label="Home">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 10.8L12 3.7l8.5 7.1v8.2a1.5 1.5 0 0 1-1.5 1.5h-4.7v-6.2H9.7v6.2H5a1.5 1.5 0 0 1-1.5-1.5v-8.2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span>Home</span>
+    </a>
+    <a class="mobile-nav-item" href="#series" data-nav="series" aria-label="Series">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M8 3v4M16 3v4M7 15h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Series</span>
+    </a>
+    <a class="mobile-center-logo" href="#home" aria-label="Vibefilx Home">
+        <span class="mobile-logo-orb">
+            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs><linearGradient id="mobileVfGradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#9b6cff"/><stop offset="55%" stop-color="#6d28d9"/><stop offset="100%" stop-color="#22d3ee"/></linearGradient></defs>
+                <path d="M12 14h25l27 43 15-23h29L93 57H64L37 14z" fill="url(#mobileVfGradient)"/>
+                <path d="M54 35l12-21h43L101 30H75L64 49z" fill="url(#mobileVfGradient)"/>
+            </svg>
+        </span>
+        <span>Vibefilx</span>
+    </a>
+    <a class="mobile-nav-item" href="#movies" data-nav="movies" aria-label="Movies">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M7 5v14M17 5v14M3 10h4M17 10h4M3 14h4M17 14h4" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Movies</span>
+    </a>
+    <a class="mobile-nav-item" href="#my-list" data-nav="list" aria-label="My List">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 4.5h12v15l-6-3.6-6 3.6v-15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8h6M9 11.5h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>My List</span>
+    </a>
+</nav>
+
+<section class="my-list-anchor" id="my-list" aria-hidden="true"></section>
+
 <script src="js/tmdb-config.js"></script><script src="js/app.js"></script>
+<script>
+    document.querySelectorAll('.mobile-nav-item').forEach(item => item.addEventListener('click', () => {
+        document.querySelectorAll('.mobile-nav-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+    }));
+</script>
 </body>
 </html>
