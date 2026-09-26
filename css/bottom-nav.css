@@ -1,0 +1,90 @@
+/* Responsive OTT bottom navigation - desktop support */
+@media (min-width: 701px) {
+  body { padding-bottom: 112px; }
+
+  .mobile-bottom-nav {
+    position: fixed;
+    left: 50%;
+    right: auto;
+    bottom: 22px;
+    transform: translateX(-50%);
+    width: min(720px, calc(100% - 48px));
+    height: 82px;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1.25fr 1fr 1fr;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 28px;
+    background: linear-gradient(135deg, rgba(31,31,38,.80), rgba(12,12,16,.74));
+    box-shadow: 0 20px 65px rgba(0,0,0,.60), inset 0 1px rgba(255,255,255,.16);
+    backdrop-filter: blur(28px) saturate(165%);
+    -webkit-backdrop-filter: blur(28px) saturate(165%);
+    z-index: 1500;
+    isolation: isolate;
+  }
+
+  .mobile-bottom-nav:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    background: linear-gradient(110deg, rgba(255,255,255,.08), transparent 35%, rgba(255,255,255,.035));
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .mobile-nav-item {
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #777;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    transition: .2s;
+    border-radius: 18px;
+  }
+
+  .mobile-nav-item svg { width: 27px; height: 27px; transition: .2s; }
+  .mobile-nav-item.active { color: #fff; background: rgba(255,255,255,.055); }
+  .mobile-nav-item.active svg { filter: drop-shadow(0 0 9px rgba(255,255,255,.24)); transform: translateY(-1px); }
+  .mobile-nav-item:hover { color: #fff; background: rgba(255,255,255,.07); }
+  .mobile-nav-item:active { transform: scale(.94); }
+
+  .mobile-center-logo {
+    height: 92px;
+    margin-top: -32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .2px;
+  }
+
+  .mobile-logo-orb {
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    border-radius: 23px;
+    background: linear-gradient(145deg, rgba(26,21,45,.98), rgba(10,10,15,.96));
+    border: 1px solid rgba(151,108,255,.55);
+    box-shadow: 0 14px 32px rgba(0,0,0,.58), 0 0 30px rgba(108,68,255,.18), inset 0 1px rgba(255,255,255,.10);
+  }
+
+  .mobile-logo-orb svg { width: 48px; height: 48px; }
+}
+
+/* Keep the same glass navigation on phones, while the existing mobile layout controls sizing. */
+@media (max-width: 700px) {
+  .mobile-bottom-nav { display: grid !important; }
+}
